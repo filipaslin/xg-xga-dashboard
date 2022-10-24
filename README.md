@@ -17,3 +17,5 @@ After a moment the dashboard should then be running on http://127.0.0.1:8050/ (o
 
 
 ![Screenshot from 2022-10-24 20-39-20](https://user-images.githubusercontent.com/33630025/197617144-9f83d7b7-1423-49f3-8879-915e25b63d0f.png)
+
+To stop the dashboard just stop the script.
