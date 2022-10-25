@@ -16,9 +16,9 @@ python app.py
 After a moment the dashboard should then be running on http://127.0.0.1:8050/ (or http://localhost:8050/) and look like
 
 
-![Screenshot from 2022-10-25 11-49-32](https://user-images.githubusercontent.com/33630025/197742153-19fbe8c2-7703-42c2-9f9e-3ed4ed256096.png)
+![Screenshot from 2022-10-25 11-59-24](https://user-images.githubusercontent.com/33630025/197744207-5e4d4018-bec1-445e-90be-cfb3431e955d.png)
+![Screenshot from 2022-10-25 11-59-03](https://user-images.githubusercontent.com/33630025/197744214-9a87a0b9-77a9-477a-afb1-a353826a59e5.png)
 
-![Screenshot from 2022-10-25 11-49-42](https://user-images.githubusercontent.com/33630025/197742194-ff87aab5-a46a-49e1-9834-71a18b601ee8.png)
 
 
 To kill the dashboard just stop the script.
