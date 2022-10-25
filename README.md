@@ -1,6 +1,6 @@
 # xG/xGA-dashboard
 
-A dashboard for visulizing trends in xG and xG-against for teams in the top 5 leagues, as well as trends in individual metrics, for seasons 2017-18 and onwards. Built using Python3.7 and Dash.
+A dashboard for visulizing trends in xG and xG-against for teams in the top 7 leagues + The Championship, as well as trends in individual metrics, for seasons 2017-18 and onwards. Built using Python3.7 and Dash.
 
 To install dependencies run:
 ``` 
