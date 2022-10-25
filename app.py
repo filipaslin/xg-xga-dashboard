@@ -10,8 +10,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.graph_objs import *
 
-leagues = ["Premier-League", "La-Liga", "Ligue-1", "Bundesliga", "Serie-A"]
-league_ids = {"Premier-League": "9", "La-Liga": "12", "Ligue-1": "13", "Bundesliga": "20", "Serie-A": "11"}
+leagues = ["Premier-League", "La-Liga", "Ligue-1", "Bundesliga", "Serie-A", "Eredivisie", "Primeira-Liga", "Championship"]
+league_ids = {"Premier-League": "9", "La-Liga": "12", "Ligue-1": "13", "Bundesliga": "20", "Serie-A": "11", 
+            "Eredivisie": "23", "Primeira-Liga": "32", "Championship": "10"}
 seasons = ["20"+str(i)+"-20"+str(i+1) for i in range(17, 23)]
 
 team_urls = {}
@@ -40,12 +41,13 @@ def update_teams(league):
     Output('comps', 'options'),
     Output('comps', 'value'),
     Output('players', 'options'),
+    Output('players', 'value'),
     Output('loader', 'children')],
     Input('teams', 'value'),
 )
 def get_games(url):
     if url == "":
-        return pd.DataFrame().to_dict(), [], [], [], ""
+        return pd.DataFrame().to_dict(), [], [], [], [], ""
     dfs = [None for s in seasons]
     for i, s in enumerate(seasons):
         u = url.split("/")
@@ -59,7 +61,8 @@ def get_games(url):
     df = pd.concat(dfs, axis=0, ignore_index=True)
     xg_df = df[~df.xG.isna()]
     comps = xg_df.Comp.unique()
-    return xg_df.to_dict(), comps, comps, [{"label": p, "value": play_links[p]} for p in play_links], ""
+    players = sorted([{"label": p, "value": play_links[p]} for p in play_links], key=lambda d: d['label'])
+    return xg_df.to_dict(), comps, comps, players, [], ""
 
 @app.callback(
     [Output('players-memory', 'data'),
@@ -89,7 +92,7 @@ def get_player_games(url):
     df = df[(~df.Comp.isna()) & (~df['Expected: xG'].isna())]
     df = df[df['Expected: xG'] != "On matchday squad, but did not play"]
     comps = df.Comp.unique()
-    metrics = df.columns[:-3]
+    metrics = sorted([m for m in df.columns if m not in ["Season: ", "Comp", "Date"]])
     return df.to_dict(), comps, comps, metrics, ['Expected: xG'], ""
 
 @app.callback(
@@ -194,12 +197,12 @@ app.layout = html.Div(children=[
             ),
         ]),
         dcc.Loading(html.Div([html.Div(id='loader', hidden=True), html.Div(id="output")])),
-        html.Div(children=[html.H1("Player Metric-moving averages")]),
+        html.Div(children=[html.H2("Player Metrics-moving averages")]),
         dbc.Row(
             [
                 dbc.Col(html.H3("Select Player:")),
                 dbc.Col(html.H3("Select Competitions:")),
-                dbc.Col(html.H3("Select Metric:")),
+                dbc.Col(html.H3("Select Metrics:")),
             ]
         ),
         dbc.Row(
