@@ -194,6 +194,7 @@ app.layout = html.Div(children=[
             ),
         ]),
         dcc.Loading(html.Div([html.Div(id='loader', hidden=True), html.Div(id="output")])),
+        html.Div(children=[html.H1("Player Metric-moving averages")]),
         dbc.Row(
             [
                 dbc.Col(html.H3("Select Player:")),
@@ -203,7 +204,7 @@ app.layout = html.Div(children=[
         ),
         dbc.Row(
             [
-                dbc.Col(dcc.Dropdown(id="players", clearable=False, style=dropdown_style)),
+                dbc.Col(dcc.Dropdown(id="players", clearable=False, style=dropdown_style, placeholder="Select a Team to load players")),
                 dbc.Col(dcc.Dropdown(id="players-comps", multi=True, clearable=False, style=dropdown_style)),
                 dbc.Col(dcc.Dropdown(id="players-metrics", multi=True, clearable=False, style=dropdown_style))
             ]
